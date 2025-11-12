@@ -20,7 +20,7 @@ export default function Signup() {
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/api/signup", {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/signup`, {
         name,
         email,
         password,
