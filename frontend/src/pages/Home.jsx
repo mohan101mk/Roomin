@@ -6,63 +6,13 @@ const Home = () => {
 
   return (
     <div style={{ fontFamily: "Arial, sans-serif", background: "#f8fafc" }}>
-      {/* NAVBAR */}
-      <nav
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "20px 40px",
-          background: "#ffffff",
-          boxShadow: "0 2px 10px rgba(0,0,0,0.08)",
-          position: "sticky",
-          top: 0,
-          zIndex: 100,
-        }}
-      >
-        <h1 style={{ fontSize: "24px", fontWeight: "700", color: "#4f46e5" }}>
-          Roomin
-        </h1>
 
-        <div style={{ display: "flex", gap: "15px" }}>
-          <button
-            onClick={() => navigate("/login")}
-            style={{
-              padding: "8px 18px",
-              background: "transparent",
-              border: "1px solid #4f46e5",
-              borderRadius: "6px",
-              color: "#4f46e5",
-              cursor: "pointer",
-              fontSize: "15px",
-            }}
-          >
-            Login
-          </button>
-
-          <button
-            onClick={() => navigate("/signup")}
-            style={{
-              padding: "8px 18px",
-              background: "#4f46e5",
-              border: "none",
-              borderRadius: "6px",
-              color: "white",
-              cursor: "pointer",
-              fontSize: "15px",
-            }}
-          >
-            Sign Up
-          </button>
-        </div>
-      </nav>
-
-      {/* HERO SECTION */}
       <section
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          flexWrap: "wrap",
           padding: "80px 60px",
           background: "#eef2ff",
         }}
@@ -86,11 +36,13 @@ const Home = () => {
               lineHeight: "1.6",
             }}
           >
-            Roomin helps you discover, compare and book rooms effortlessly.  
-            Whether you're a student, traveller, or tenant — we’ve got you covered.
+            Roomin helps you discover, compare and book rooms effortlessly.
+            Whether you're a student, traveller, or tenant — we’ve got you
+            covered.
           </p>
 
           <button
+            onClick={() => navigate("/")}
             style={{
               marginTop: "30px",
               padding: "14px 28px",
@@ -100,7 +52,10 @@ const Home = () => {
               borderRadius: "8px",
               fontSize: "18px",
               cursor: "pointer",
+              transition: "all 0.3s ease",
             }}
+            onMouseOver={(e) => (e.target.style.background = "#4338ca")}
+            onMouseOut={(e) => (e.target.style.background = "#4f46e5")}
           >
             Explore Rooms
           </button>
@@ -115,11 +70,12 @@ const Home = () => {
             borderRadius: "12px",
             objectFit: "cover",
             boxShadow: "0 6px 18px rgba(0,0,0,0.15)",
+            marginTop: "40px",
           }}
         />
       </section>
 
-      {/* FEATURES */}
+
       <section style={{ padding: "60px 40px", background: "#ffffff" }}>
         <h3
           style={{
@@ -138,6 +94,7 @@ const Home = () => {
             display: "flex",
             justifyContent: "center",
             gap: "30px",
+            flexWrap: "wrap",
           }}
         >
           {[
@@ -163,7 +120,14 @@ const Home = () => {
                 borderRadius: "12px",
                 textAlign: "center",
                 boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
+                transition: "transform 0.2s ease",
               }}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.transform = "translateY(-5px)")
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.transform = "translateY(0)")
+              }
             >
               <h4
                 style={{
@@ -175,13 +139,15 @@ const Home = () => {
               >
                 {feature.title}
               </h4>
-              <p style={{ color: "#475569" }}>{feature.text}</p>
+              <p style={{ color: "#475569", lineHeight: "1.5" }}>
+                {feature.text}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* FOOTER */}
+
       <footer
         style={{
           background: "#1e293b",

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext"; 
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,10 +19,12 @@ export default function Login() {
       });
 
       console.log("Login Response:", res.data);
-
       alert("Login successful!");
-      localStorage.setItem("token", res.data.token);
 
+
+      login(res.data.token,res.data.user); 
+      
+      navigate("/");
     } catch (err) {
       console.log(err);
       alert("Invalid email or password");

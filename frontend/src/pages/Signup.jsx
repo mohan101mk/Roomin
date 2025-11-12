@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // 1. IMPORT useNavigate
+import { useAuth } from "../AuthContext";     // 2. IMPORT useAuth
 
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
+  const navigate = useNavigate(); // 3. GET THE navigate FUNCTION
+  const { login } = useAuth();    // 4. GET THE login FUNCTION
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,11 +29,21 @@ export default function Signup() {
       console.log("Signup Response:", res.data);
 
       alert("Signup successful!");
-      localStorage.setItem("token", res.data.token);
+      
+
+      login(res.data.token,res.data.user);
+      
+
+      navigate("/");
 
     } catch (err) {
       console.log(err);
-      alert("Signup failed!");
+
+      if (err.response && err.response.status === 409) {
+        alert("Email already in use");
+      } else {
+        alert("Signup failed!");
+      }
     }
   };
 
